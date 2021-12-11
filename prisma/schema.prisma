@@ -18,4 +18,13 @@ model Keyboard {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String   @db.VarChar(255)
+  keycaps   Keycap[]
+}
+
+model Keycap {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  name      String
+  Keyboards Keyboard[]
 }
