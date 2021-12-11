@@ -13,12 +13,20 @@ generator client {
   previewFeatures = ["referentialIntegrity"]
 }
 
+enum keyboard_layout {
+  hhkb
+  tkl
+  alice
+  arisu
+}
+
 model Keyboard {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String   @db.VarChar(255)
+  id        Int             @id @default(autoincrement())
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  name      String          @db.VarChar(255)
   keycaps   Keycap[]
+  layouts   keyboard_layout
 }
 
 model Keycap {
