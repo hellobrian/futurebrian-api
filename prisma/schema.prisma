@@ -25,14 +25,14 @@ enum KeyboardLayoutEnum {
 }
 
 model KeyboardLayout {
-  id       Int                @id @default(autoincrement())
+  id       String             @id @default(uuid())
   name     KeyboardLayoutEnum @unique
-  Keycap   Keycap?            @relation(fields: [keycapId], references: [id])
-  keycapId Int?
+  keycap   Keycap?            @relation(fields: [keycapId], references: [id])
+  keycapId String?
 }
 
 model Keyboard {
-  id        Int                @id @default(autoincrement())
+  id        String             @id @default(uuid())
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
   name      String             @db.VarChar(255)
@@ -41,10 +41,10 @@ model Keyboard {
 }
 
 model Keycap {
-  id        Int              @id @default(autoincrement())
+  id        String           @id @default(uuid())
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt
   name      String
-  Keyboards Keyboard[]
-  layout    KeyboardLayout[]
+  keyboards Keyboard[]
+  layouts   KeyboardLayout[]
 }
