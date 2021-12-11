@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 
-const KeyboardLayoutsEnum = [
+export const KeyboardLayoutsEnum = [
   "alice",
   "arisu",
   "full",
@@ -12,7 +12,7 @@ const KeyboardLayoutsEnum = [
   "tkl",
 ];
 
-function getKeyboardLayouts() {
+export function getKeyboardLayouts() {
   return KeyboardLayoutsEnum.map((layoutName) => {
     return {
       name: layoutName,
