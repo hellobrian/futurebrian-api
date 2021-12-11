@@ -12,15 +12,6 @@ export default function Home() {
 
       <main>
         <h1>futurebrian-api</h1>
-
-        <ul>
-          <li>
-            <a href="/api/keyboards">GET keyboards</a>
-          </li>
-          <li>
-            <a href="/api/keycaps">GET keycaps</a>
-          </li>
-        </ul>
       </main>
 
       <footer>
