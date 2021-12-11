@@ -18,6 +18,10 @@ enum keyboard_layout {
   tkl
   alice
   arisu
+  sixty
+  sixty_five
+  seventy_five
+  full
 }
 
 model Keyboard {
