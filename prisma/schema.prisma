@@ -13,30 +13,38 @@ generator client {
   previewFeatures = ["referentialIntegrity"]
 }
 
-enum keyboard_layout {
-  hhkb
-  tkl
+enum KeyboardLayoutEnum {
   alice
   arisu
+  full
+  hhkb
+  seventy_five
   sixty
   sixty_five
-  seventy_five
-  full
+  tkl
+}
+
+model KeyboardLayout {
+  id       Int                @id @default(autoincrement())
+  name     KeyboardLayoutEnum @unique
+  Keycap   Keycap?            @relation(fields: [keycapId], references: [id])
+  keycapId Int?
 }
 
 model Keyboard {
-  id        Int             @id @default(autoincrement())
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-  name      String          @db.VarChar(255)
+  id        Int                @id @default(autoincrement())
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  name      String             @db.VarChar(255)
   keycaps   Keycap[]
-  layouts   keyboard_layout
+  layout    KeyboardLayoutEnum
 }
 
 model Keycap {
-  id        Int        @id @default(autoincrement())
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id        Int              @id @default(autoincrement())
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
   name      String
   Keyboards Keyboard[]
+  layout    KeyboardLayout[]
 }
