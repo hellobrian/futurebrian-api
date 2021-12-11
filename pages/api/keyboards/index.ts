@@ -1,11 +1,15 @@
-import prisma from "../../lib/prisma";
+import prisma from "../../../lib/prisma";
 
 export default async function assetHandler(req, res) {
   const { method } = req;
   switch (method) {
     case "GET":
       try {
-        const keyboards = await prisma.keyboard.findMany();
+        const keyboards = await prisma.keyboard.findMany({
+          include: {
+            keycaps: true,
+          },
+        });
         res.status(200).json(keyboards);
       } catch (e) {
         console.error("Request error", e);
