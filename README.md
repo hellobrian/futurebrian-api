@@ -10,20 +10,18 @@ Login, create new branch and shadow branch for prisma migrations
 
 ```sh
 pscale auth login
-pscale branch create <new-branch>
-pscale branch create shadow
+pscale branch create <source-db> <new-branch>
+pscale branch create <source-db> shadow
 ```
 
 Connect to DB branch
 
 ```sh
-pscale connect <new-branch> --port 3309
-```
+# connect to new branch
+pscale connect <source-db> <new-branch> --port 3309
 
-In a new terminal window, connect to shadow branch
-
-```sh
-pscale connect shadow --port 3310
+# In a new terminal window, connect to shadow branch
+pscale connect <source-db> shadow --port 3310
 ```
 
 ### Prisma
