@@ -35,7 +35,7 @@ model Keyboard {
   id        String             @id @default(uuid())
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
-  name      String             @db.VarChar(255)
+  name      String             @unique @db.VarChar(255)
   keycaps   Keycap[]
   layout    KeyboardLayoutEnum
 }
@@ -44,7 +44,7 @@ model Keycap {
   id        String           @id @default(uuid())
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt
-  name      String
+  name      String           @unique
   keyboards Keyboard[]
   layouts   KeyboardLayout[]
 }
