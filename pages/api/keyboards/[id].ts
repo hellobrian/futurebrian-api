@@ -1,20 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../lib/prisma";
-import { unslugify } from "../../../utils/unslugify";
+import prisma from "lib/prisma";
+import { unslugify } from "utils/unslugify";
 
-export default async function assetHandler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  switch (req.method) {
+interface Request extends NextApiRequest {
+  query: {
+    id: string;
+  };
+}
+
+export default async function assetHandler(req: Request, res: NextApiResponse) {
+  const {
+    method,
+    query: { id },
+  } = req;
+
+  switch (method) {
     case "GET":
       try {
         const keyboardByID = await prisma.keyboard.findMany({
           where: {
-            OR: [
-              { id: `${req.query.id}` },
-              { name: `${unslugify(req.query.id)}` },
-            ],
+            OR: [{ id }, { name: unslugify(id) }],
           },
           include: {
             keycaps: true,
@@ -28,7 +33,7 @@ export default async function assetHandler(
       break;
     default:
       res.setHeader("Allow", ["GET"]);
-      res.status(405).end(`Method ${req.method} Not Allowed`);
+      res.status(405).end(`Method ${method} Not Allowed`);
       break;
   }
 }
