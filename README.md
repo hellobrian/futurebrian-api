@@ -1,13 +1,47 @@
+# futurebrian-api
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+### PlanetScale
 
-```bash
+Login, create new branch and shadow branch for prisma migrations
+
+```sh
+pscale auth login
+pscale branch create <new-branch>
+pscale branch create shadow
+```
+
+Connect to DB branch
+
+```sh
+pscale connect <new-branch> --port 3309
+```
+
+In a new terminal window, connect to shadow branch
+
+```sh
+pscale connect shadow --port 3310
+```
+
+### Prisma
+
+After making schema changes run migrate and generate commands. Then try CRUD actions in studio.
+
+```sh
+npx prisma migrate dev --name <migration-name>
+npx prisma generate
+npx prisma studio
+```
+
+### Next.js
+
+Interact and develop API endpoints with Next.js
+
+```sh
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

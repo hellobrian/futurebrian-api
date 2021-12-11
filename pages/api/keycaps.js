@@ -5,11 +5,11 @@ export default async function assetHandler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const keyboards = await prisma.keyboard.findMany();
+        const keyboards = await prisma.keycap.findMany();
         res.status(200).json(keyboards);
       } catch (e) {
         console.error("Request error", e);
-        res.status(500).json({ error: "Error fetching keyboards", message: e });
+        res.status(500).json({ error: "Error fetching keycaps", message: e });
       }
       break;
     default:
